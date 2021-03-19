@@ -2,6 +2,7 @@
 <androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
     xmlns:app="http://schemas.android.com/apk/res-auto"
     xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/recycler_line"
     android:layout_width="match_parent"
     android:layout_height="wrap_content"
     android:onClick="recycler">
@@ -9,11 +10,12 @@
     <TextView
         android:id="@+id/titulo"
         android:layout_width="match_parent"
-        android:layout_height="30dp"
+        android:layout_height="60dp"
         android:layout_marginTop="20dp"
         android:background="@drawable/border"
-        android:gravity="left"
+        android:gravity="center_vertical"
         android:text="Nota 1"
+        android:layout_margin="25dp"
         android:textColor="@color/black"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
@@ -21,17 +23,5 @@
         app:layout_constraintTop_toTopOf="parent"
         android:paddingLeft="10dp" />
 
-    <TextView
-        android:id="@+id/descricao"
-        android:layout_width="match_parent"
-        android:layout_height="50dp"
-        android:background="@drawable/costum_input"
-        android:paddingStart="5dp"
-        android:paddingLeft="5dp"
-        android:text="Descrição da nota"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.0"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/titulo" />
 
 </androidx.constraintlayout.widget.ConstraintLayout>

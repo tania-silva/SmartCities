@@ -6,7 +6,6 @@ import android.os.Bundle
 import android.view.View
 import android.widget.Toast
 import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.smartcities.Adapter.LineAdapter
 import com.example.smartcities.DataClass.Place
 import kotlinx.android.synthetic.main.activity_main.*
 

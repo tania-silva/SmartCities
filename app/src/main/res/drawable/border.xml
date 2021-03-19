@@ -6,9 +6,9 @@
         </shape>
     </item>
 
-    <item android:top="3dp" android:left="3dp" android:right="3dp">
+    <item  android:bottom="3dp" >
         <shape android:shape="rectangle">
-            <solid android:color="@color/amarelo_claro"/>
+            <solid android:color="@color/white"/>
         </shape>
     </item>
 

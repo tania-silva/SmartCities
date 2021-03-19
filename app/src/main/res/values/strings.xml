@@ -1,3 +1,9 @@
 <resources>
-    <string name="app_name">Smart Cities</string>
+    <string name="editar">Edit</string>
+    <string name="app_name" translatable="false">Smart Cities</string>
+    <string name="remover">Delete</string>
+    <string name="aviso_titulo">Insert title</string>
+    <string name="aviso_desc">Insert description!</string>
+    <string name="titulo">Title</string>
+    <string name="criar_nota">Add Note</string>
 </resources>

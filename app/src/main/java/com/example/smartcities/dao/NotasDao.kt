@@ -10,12 +10,17 @@ import com.example.smartcities.ENTITIES.Notas
 interface NotasDao {
 
     @Query("SELECT * from notas_table ORDER BY id ASC")
-    fun getAllCities(): LiveData<List<Notas>>
+    fun getAllNotes(): LiveData<List<Notas>>
 
     @Insert(onConflict = OnConflictStrategy.IGNORE)
     suspend fun insert(notas: Notas)
 
-    @Query("DELETE FROM notas_table")
-    suspend fun deleteAll()
+    @Query("DELETE FROM notas_table WHERE id==:id")
+    suspend fun delete(id: Int?)
+
+
+
+    @Update
+    suspend fun update(notas: Notas)
 
 }
