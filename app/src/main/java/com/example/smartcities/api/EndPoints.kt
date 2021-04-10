@@ -10,5 +10,5 @@ interface EndPoints {
 
     @GET("/myslim/api/utl/{id}")
     fun getUserById(@Path("id") id: Int): Call<User>
-
+   //ENDPOINST CORRIGIDOS
 }
