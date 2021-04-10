@@ -18,8 +18,6 @@ interface NotasDao {
     @Query("DELETE FROM notas_table WHERE id==:id")
     suspend fun delete(id: Int?)
 
-
-
     @Update
     suspend fun update(notas: Notas)
 
