@@ -5,10 +5,13 @@ import retrofit2.http.*
 
 interface EndPoints {
 
-    @GET("myslim/api/utl")
+    @GET("api/utls")
     fun getUsers(): Call<List<User>>
 
-    @GET("/myslim/api/utl/{id}")
-    fun getUserById(@Path("id") id: Int): Call<User>
-   //ENDPOINST CORRIGIDOS
+    @GET("api/utl/{id}")
+    fun getUserById(@Path("id") id: Int): Call<List<User>>
+
+    @FormUrlEncoded
+    @POST("api/utl")
+    fun postUtl(@Field("email") first: String?, @Field ("pass") second: String?): Call<List<OutputPost>>
 }
