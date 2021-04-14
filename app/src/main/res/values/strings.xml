@@ -6,4 +6,12 @@
     <string name="aviso_desc">Insert description!</string>
     <string name="titulo">Title</string>
     <string name="criar_nota">Add Note</string>
+    <string name="login">Login</string>
+    <string name="aviso_email">Missign email</string>
+    <string name="aviso_pass">Missing Password</string>
+    <string name="pass_email_erro">Fields do not match</string>
+    <string name="login_p" translatable="false">login_p</string>
+    <string name="login_shared" translatable="false">login_shared</string>
+    <string name="nome" translatable="false">nome</string>
+    <string name="id_utl" translatable="false">id_utl</string>
 </resources>
