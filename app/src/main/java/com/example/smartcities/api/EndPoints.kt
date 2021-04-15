@@ -8,6 +8,9 @@ interface EndPoints {
     @GET("api/utls")
     fun getUsers(): Call<List<User>>
 
+    @GET("api/anomalias")
+    fun getAnomalias(): Call<List<Marker>>
+
     @GET("api/utl/{id}")
     fun getUserById(@Path("id") id: Int): Call<List<User>>
 

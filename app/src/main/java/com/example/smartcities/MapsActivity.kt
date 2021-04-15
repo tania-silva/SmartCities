@@ -5,10 +5,14 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.util.Log
 import android.view.Menu
 import android.view.MenuInflater
 import android.view.MenuItem
 import android.widget.Toast
+import com.example.smartcities.api.EndPoints
+import com.example.smartcities.api.OutputPost
+import com.example.smartcities.api.ServiceBuilder
 
 import com.google.android.gms.maps.CameraUpdateFactory
 import com.google.android.gms.maps.GoogleMap
@@ -16,6 +20,11 @@ import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
+import retrofit2.Call
+import retrofit2.Callback
+import retrofit2.Response
+import com.example.smartcities.api.Marker
+import com.google.android.gms.maps.model.BitmapDescriptorFactory
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
@@ -28,6 +37,50 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
+        var id_utl: Any? = null;
+
+        //Obter id do Utilizador
+        val sharedPref: SharedPreferences = getSharedPreferences(
+            getString(R.string.login_p), Context.MODE_PRIVATE
+        )
+        if (sharedPref != null){
+            id_utl = sharedPref.all[getString(R.string.id_utl)]
+        }
+
+        Toast.makeText(this@MapsActivity, id_utl.toString(), Toast.LENGTH_SHORT).show()
+
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getAnomalias()
+        var position: LatLng
+
+        call.enqueue(object : Callback<List<Marker>>{
+            override fun onResponse(call: Call<List<Marker>>, response: Response<List<Marker>>) {
+                if (response.isSuccessful){
+
+                    for(Marker in response.body()!!){
+                        Log.d("TAG_",  Marker.utilizador_id.toString() +"-" + Marker.id_anom.toString())
+                        position = LatLng(Marker.lat, Marker.lng)
+
+                        if(id_utl.toString().toInt() == Marker.utilizador_id){
+                            mMap.addMarker(MarkerOptions()
+                                .position(position).title(Marker.utilizador_id.toString() + " - " + Marker.titulo)
+                                .snippet(Marker.descricao + "," + Marker.imagem)
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+                    }else{
+                            mMap.addMarker(MarkerOptions()
+                                .position(position).title(Marker.utilizador_id.toString() + " - " + Marker.titulo)
+                                .snippet(Marker.descricao + "," + Marker.imagem)
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)))
+                    }
+
+                    }
+                }
+            }
+
+            override fun onFailure(call: Call<List<Marker>>, t: Throwable) {
+                Toast.makeText(this@MapsActivity, getString(R.string.pass_email_erro), Toast.LENGTH_SHORT).show()
+            }
+        })
     }
 
     /**
@@ -44,8 +97,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
 
         // Adicionar um marcador
         val braga = LatLng(41.542114,-8.423440)
-        mMap.addMarker(MarkerOptions().position(braga).title("Marcador em Braga"))
-        mMap.moveCamera(CameraUpdateFactory.newLatLng(braga))
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(braga, 7.0f)) // centra o mapa nas cordenadas do ponto e com o zoom já aplicado
     }
 
 
@@ -90,7 +142,6 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback {
         //nothing
         Toast.makeText(this@MapsActivity, getString(R.string.back), Toast.LENGTH_SHORT).show()
     }
-
 
 
 }
