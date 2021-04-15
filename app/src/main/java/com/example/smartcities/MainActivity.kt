@@ -35,13 +35,10 @@ class MainActivity : AppCompatActivity() {
         )
         if (sharedPref != null){
             if(sharedPref.all[getString(R.string.login_shared)]==true){
-                /*var intent = Intent(this, MapsActivity::class.java)
-                startActivity(intent)*/
-
+                var intent = Intent(this, Mapa::class.java)
+                startActivity(intent)
             }
         }
-
-
 
     }
 
@@ -60,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
         var email = findViewById<EditText>(R.id.email)
         var pass = findViewById<EditText>(R.id.pass)
-        val intent = Intent(this, MainActivity2::class.java)
+        val intent = Intent(this, Mapa::class.java)
 
 
  //Validações dos campos email e pass
@@ -95,7 +92,6 @@ class MainActivity : AppCompatActivity() {
                                     putString(getString(R.string.nome), OutputPost.nome)
                                     putInt(getString(R.string.id_utl), OutputPost.id_utl)
                                     commit()
-                                    Log.d("****SHARED","${OutputPost.id_utl}" )
                                 }
 
                             }
@@ -111,10 +107,12 @@ class MainActivity : AppCompatActivity() {
 
         }
 
-
-
-
-
-
     }
+
+    override fun onBackPressed() {
+        //nothing
+        Toast.makeText(this@MainActivity, getString(R.string.back), Toast.LENGTH_SHORT).show()
+    }
+
+
 }

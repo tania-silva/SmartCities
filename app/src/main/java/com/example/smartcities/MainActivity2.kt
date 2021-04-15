@@ -1,9 +1,14 @@
 package com.example.smartcities
 
 import android.app.Activity
+import android.content.Context
 import android.content.Intent
+import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import android.view.Menu
+import android.view.MenuInflater
+import android.view.MenuItem
 import android.view.View
 import android.widget.Toast
 import androidx.lifecycle.Observer
@@ -24,6 +29,12 @@ class MainActivity2 : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main2)
+
+        /* calling the action bar
+        var actionBar = getSupportActionBar()
+        actionBar?.setHomeAsUpIndicator(R.drawable.ic_back);
+        actionBar?.setDisplayHomeAsUpEnabled(true)*/
+
 
         // recycler view
         val recyclerView = findViewById<RecyclerView>(R.id.recycler_view)
@@ -71,5 +82,58 @@ class MainActivity2 : AppCompatActivity() {
                     Toast.LENGTH_LONG).show()
         }
     }
+
+
+    override fun onCreateOptionsMenu(menu: Menu?): Boolean {
+        val inflater: MenuInflater = menuInflater
+        inflater.inflate(R.menu.menu_notas, menu)
+
+//Se o utilizador estiver logado o menu aparece
+        val sharedPref: SharedPreferences = getSharedPreferences(
+            getString(R.string.login_p), Context.MODE_PRIVATE
+        )
+        if (sharedPref != null){
+            if(sharedPref.all[getString(R.string.login_shared)]==true){
+                val logout = menu!!.findItem(R.id.m_logout)
+                logout.isVisible = true
+
+                val map = menu!!.findItem(R.id.m_map)
+                map.isVisible = true
+            }
+        }
+        return true
+    }
+
+
+
+    override fun onOptionsItemSelected(item: MenuItem): Boolean {
+        return when (item.itemId) {
+            R.id.m_logout -> {
+
+                //Alterar o Shared Preferences
+                val sharedPref: SharedPreferences = getSharedPreferences(
+                    getString(R.string.login_p), Context.MODE_PRIVATE
+                )
+                with(sharedPref.edit()){
+                    putBoolean(getString(R.string.login_shared), false)
+                    putString(getString(R.string.nome), "")
+                    putInt(getString(R.string.id_utl), 0)
+                    commit()
+                }
+
+                //Navegar para o menu inicial
+                var intent = Intent(this, MainActivity::class.java)
+                startActivity(intent)
+                true
+            } R.id.m_map -> {
+                //Navegar para o menu das notas
+                var intent = Intent(this, Mapa::class.java)
+                startActivity(intent)
+                true
+            }
+            else -> super.onOptionsItemSelected(item)
+        }
+    }
+
 
 }

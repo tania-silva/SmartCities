@@ -15,4 +15,8 @@
     <string name="nome" translatable="false">nome</string>
     <string name="id_utl" translatable="false">id_utl</string>
     <string name="email_erro">Invalid Email</string>
+    <string name="m_logout">Logout</string>
+    <string name="m_notes">My notes</string>
+    <string name="menu_opc" translatable="false">menu</string>
+    <string name="back">There is no back action</string>
 </resources>
