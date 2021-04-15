@@ -6,6 +6,7 @@ import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import android.util.Patterns
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
@@ -72,6 +73,8 @@ class MainActivity : AppCompatActivity() {
                     pass.error = getString(R.string.aviso_pass)
                 }
 
+        }else if(!Patterns.EMAIL_ADDRESS.matcher(email.text.toString()).matches()){
+            email.error= getString(R.string.email_erro)
         }else{
                 val request = ServiceBuilder.buildService(EndPoints::class.java)
                 val call = request.postUtl(email.text.toString(), pass.text.toString())
@@ -96,10 +99,6 @@ class MainActivity : AppCompatActivity() {
                                 }
 
                             }
-
-
-
-
 
                             startActivity(intent)
                         }

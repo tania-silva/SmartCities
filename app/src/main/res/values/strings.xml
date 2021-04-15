@@ -14,4 +14,5 @@
     <string name="login_shared" translatable="false">login_shared</string>
     <string name="nome" translatable="false">nome</string>
     <string name="id_utl" translatable="false">id_utl</string>
+    <string name="email_erro">Invalid Email</string>
 </resources>
