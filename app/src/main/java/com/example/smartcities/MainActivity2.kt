@@ -127,7 +127,7 @@ class MainActivity2 : AppCompatActivity() {
                 true
             } R.id.m_map -> {
                 //Navegar para o menu das notas
-                var intent = Intent(this, Mapa::class.java)
+                var intent = Intent(this, MapsActivity::class.java)
                 startActivity(intent)
                 true
             }

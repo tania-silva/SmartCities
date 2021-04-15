@@ -35,7 +35,7 @@ class MainActivity : AppCompatActivity() {
         )
         if (sharedPref != null){
             if(sharedPref.all[getString(R.string.login_shared)]==true){
-                var intent = Intent(this, Mapa::class.java)
+                var intent = Intent(this, MapsActivity::class.java)
                 startActivity(intent)
             }
         }
@@ -57,7 +57,7 @@ class MainActivity : AppCompatActivity() {
 
         var email = findViewById<EditText>(R.id.email)
         var pass = findViewById<EditText>(R.id.pass)
-        val intent = Intent(this, Mapa::class.java)
+        val intent = Intent(this, MapsActivity::class.java)
 
 
  //Validações dos campos email e pass
