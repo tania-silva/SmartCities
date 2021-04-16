@@ -19,5 +19,7 @@
     <string name="m_notes">My notes</string>
     <string name="menu_opc" translatable="false">menu</string>
     <string name="back">There is no back action</string>
-    <string name="title_activity_maps">Map</string>
+    <string name="title_activity_maps" translatable="false">Map</string>
+    <string name="update">Update</string>
+    <string name="Delete">Delete</string>
 </resources>

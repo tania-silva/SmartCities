@@ -5,19 +5,15 @@ import android.content.Intent
 import android.content.SharedPreferences
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
-import android.util.Log
 import android.util.Patterns
 import android.view.View
 import android.widget.EditText
 import android.widget.Toast
-import androidx.recyclerview.widget.LinearLayoutManager
-import com.example.smartcities.DataClass.Place
 import com.example.smartcities.api.EndPoints
 import com.example.smartcities.api.OutputPost
 import com.example.smartcities.api.ServiceBuilder
-import com.example.smartcities.api.User
 import kotlinx.android.synthetic.main.activity_main.*
-import org.json.JSONArray
+
 
 import retrofit2.Call
 import retrofit2.Callback
@@ -29,6 +25,8 @@ class MainActivity : AppCompatActivity() {
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        this.getSupportActionBar()?.hide()
 
         val sharedPref: SharedPreferences = getSharedPreferences(
                 getString(R.string.login_p), Context.MODE_PRIVATE
