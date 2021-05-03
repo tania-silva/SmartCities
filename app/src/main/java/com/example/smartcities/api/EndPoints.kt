@@ -22,4 +22,9 @@ interface EndPoints {
     @POST("api/anomalia/editar") // pedido POST para editar anomalia
     fun editarAnom(@Field("id_anom") first: Int, @Field("titulo") second: String,
                    @Field("descricao") third: String, @Field("tipo_anom") fourth: String): Call<Marker>
+
+
+    @FormUrlEncoded
+    @POST("api/anomalia/delete") // pedido POST para editar anomalia
+    fun eliminarAnom(@Field("id_anom") first: Int): Call<Marker>
 }

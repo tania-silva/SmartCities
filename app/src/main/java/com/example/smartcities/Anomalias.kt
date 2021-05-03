@@ -52,6 +52,27 @@ class Anomalias : AppCompatActivity() {
     }
 
     fun Delete(view: View) {
+        val intent = Intent(this, MapsActivity::class.java)
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.eliminarAnom(idA!!.toInt())
+
+        call.enqueue(object : Callback<Marker> {
+
+            override fun onResponse(call: Call<Marker>, response: Response<Marker>) {
+                if (response.isSuccessful) {
+                    Toast.makeText(this@Anomalias, getString(R.string.edit_sucess) , Toast.LENGTH_SHORT).show()
+                    startActivity(intent)
+
+                }else{
+                    Toast.makeText(this@Anomalias, "QUASE" , Toast.LENGTH_SHORT).show()
+                }
+            }
+
+            override fun onFailure(call: Call<Marker>, t: Throwable) {
+                Log.d("TAG", "err: " + t.message)
+            }
+
+        })
 
     }
     fun Update(view: View) {
