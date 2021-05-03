@@ -35,8 +35,9 @@ import retrofit2.Callback
 import retrofit2.Response
 const val TITULOA="TITULO"
 const val DESCRICAOA="DESCRICAO"
-const val IDA="ID"
+const val IDA= "OOO"
 const val IMAGEM="IMAGEM"
+const val TIPO="IMAGEM"
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
@@ -47,7 +48,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
     private lateinit var fusedLocationClient: FusedLocationProviderClient
     private lateinit var locationCallBack: LocationCallback
     private lateinit var lastLocation: Location
-
+    var id_utl: Any? = null;
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
@@ -55,7 +56,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
         val mapFragment = supportFragmentManager
             .findFragmentById(R.id.map) as SupportMapFragment
         mapFragment.getMapAsync(this)
-        var id_utl: Any? = null;
+
 
         //Obter id do Utilizador
         val sharedPref: SharedPreferences = getSharedPreferences(
@@ -81,8 +82,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
 
                         if (id_utl.toString().toInt() == Marker.utilizador_id) {
                             mMap.addMarker(MarkerOptions()
-                                    .position(position).title(Marker.utilizador_id.toString() + "+" + Marker.titulo)
-                                    .snippet(Marker.descricao + "+" + Marker.imagem + "+" + Marker.utilizador_id + "+" + id_utl.toString())
+                                    .position(position).title(Marker.utilizador_id.toString() + "+" + Marker.titulo + "+" + Marker.tipo_anom)
+                                    .snippet(Marker.descricao + "+" + Marker.imagem + "+" + Marker.utilizador_id + "+" + id_utl.toString() + "+" + Marker.id_anom)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
                         } else {
                             mMap.addMarker(MarkerOptions()
@@ -203,15 +204,22 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
     override fun onInfoWindowClick(p0: com.google.android.gms.maps.model.Marker?) {
         val title = p0?.title?.split("+")?.toTypedArray()  //ID e tituo
         val snippet = p0?.snippet?.split("+")?.toTypedArray() //Divide o snippet
-        Toast.makeText(this, p0?.title , Toast.LENGTH_SHORT).show()
 
-       val intent = Intent(this ,Anomalias::class.java).apply {
-            putExtra(IDA, title?.get(0))
-            putExtra(TITULOA, title?.get(1))
-            putExtra(DESCRICAOA, snippet?.get(0))
-            putExtra(IMAGEM, snippet?.get(1))
+
+
+        if(id_utl.toString().equals( title?.get(0))){
+            val intent = Intent(this ,Anomalias::class.java).apply {
+                putExtra(IDA, snippet?.get(4)!!.toInt())
+                putExtra(TITULOA, title?.get(1))
+                putExtra(DESCRICAOA, snippet?.get(0))
+                putExtra(IMAGEM, snippet?.get(1))
+                putExtra(TIPO, title?.get(2))
+            }
+            startActivity(intent)
+        }else{
+            Toast.makeText(this, getString(R.string.visualizar_anom) , Toast.LENGTH_SHORT).show()
         }
-        startActivity(intent)
+
     }
 
     fun add_anom(view: View) {

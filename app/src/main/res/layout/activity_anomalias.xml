@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".MapsActivity">
+    tools:context=".Anomalias">
 
 
     <EditText
@@ -17,6 +17,8 @@
         android:inputType="textPersonName"
         android:maxLength="50"
         android:textSize="25dp"
+        android:paddingStart="12dp"
+        android:paddingEnd="12dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.562"
@@ -25,8 +27,8 @@
 
     <ImageView
         android:id="@+id/imagemAnom"
-        android:layout_width="188dp"
-        android:layout_height="174dp"
+        android:layout_width="175dp"
+        android:layout_height="141dp"
         android:layout_marginTop="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.497"
@@ -36,9 +38,9 @@
 
     <EditText
         android:id="@+id/descricaoAnom"
-        android:layout_width="300dp"
-        android:layout_height="250dp"
-        android:layout_marginTop="20dp"
+        android:layout_width="296dp"
+        android:layout_height="216dp"
+        android:layout_marginTop="10dp"
         android:background="@drawable/branco"
         android:ems="10"
         android:gravity="center_horizontal"
@@ -48,17 +50,17 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagemAnom" />
+        app:layout_constraintTop_toBottomOf="@+id/spinner" />
 
     <Button
         android:id="@+id/button2"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginStart="109dp"
-        android:layout_marginLeft="109dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginLeft="100dp"
         android:layout_marginTop="15dp"
+        android:onClick="Update"
         android:text="@string/update"
-        android:visibility="invisible"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descricaoAnom" />
 
@@ -67,12 +69,22 @@
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
         android:layout_marginTop="15dp"
-        android:layout_marginEnd="109dp"
-        android:layout_marginRight="109dp"
+        android:layout_marginEnd="100dp"
+        android:layout_marginRight="100dp"
+        android:onClick="Delete"
         android:text="@string/Delete"
-        android:visibility="invisible"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descricaoAnom" />
+
+    <Spinner
+        android:id="@+id/spinner"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_marginTop="10dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/imagemAnom" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

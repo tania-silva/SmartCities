@@ -9,4 +9,5 @@ data class Marker(
     val lng: Double,
     val imagem: String,
     val titulo: String,
+    val tipo_anom: String
 )

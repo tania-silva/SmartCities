@@ -22,4 +22,6 @@
     <string name="title_activity_maps" translatable="false">Map</string>
     <string name="update">Update</string>
     <string name="Delete">Delete</string>
+    <string name="visualizar_anom">Can only access your reports</string>
+    <string name="edit_sucess">Successfully edited</string>
 </resources>

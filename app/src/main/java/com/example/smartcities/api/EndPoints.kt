@@ -17,4 +17,9 @@ interface EndPoints {
     @FormUrlEncoded
     @POST("api/utl")
     fun postUtl(@Field("email") first: String?, @Field ("pass") second: String?): Call<List<OutputPost>>
+
+    @FormUrlEncoded
+    @POST("api/anomalia/editar") // pedido POST para editar anomalia
+    fun editarAnom(@Field("id_anom") first: Int, @Field("titulo") second: String,
+                   @Field("descricao") third: String, @Field("tipo_anom") fourth: String): Call<Marker>
 }
