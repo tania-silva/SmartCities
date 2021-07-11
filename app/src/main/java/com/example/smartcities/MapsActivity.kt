@@ -223,7 +223,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
     }
 
     fun add_anom(view: View) {
-
-        Toast.makeText(this, "Adicionar nota", Toast.LENGTH_SHORT).show()
+        //Navegar para o menu inicial
+        var intent = Intent(this, AddAnom::class.java)
+        startActivity(intent)
     }
 }
