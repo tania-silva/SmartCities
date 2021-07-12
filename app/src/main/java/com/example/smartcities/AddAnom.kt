@@ -89,6 +89,8 @@ class AddAnom : AppCompatActivity() {
         val desc = findViewById<EditText>(R.id.descricaoAnom)
         val  tipo = findViewById<Spinner>(R.id.spinner)
 
+        var intent = Intent(this, MapsActivity::class.java)
+
         if (TextUtils.isEmpty(title.text) || TextUtils.isEmpty(desc.text)) {
 
             if(TextUtils.isEmpty(title.text)) {
@@ -107,7 +109,7 @@ class AddAnom : AppCompatActivity() {
                 override fun onResponse(call: retrofit2.Call<Marker>, response: retrofit2.Response<Marker>) {
                     if (response.isSuccessful) {
                         Toast.makeText(this@AddAnom, getString(R.string.edit_sucess) , Toast.LENGTH_SHORT).show()
-                        finish()
+                        startActivity(intent)
 
                     }else{
                         Toast.makeText(this@AddAnom, "QUASE" , Toast.LENGTH_SHORT).show()
@@ -120,5 +122,9 @@ class AddAnom : AppCompatActivity() {
 
             })
         }
+    }
+
+    fun Cancelar(view: View) {
+        finish()
     }
 }

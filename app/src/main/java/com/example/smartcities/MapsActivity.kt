@@ -94,7 +94,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
                         } else {
                             mMap.addMarker(MarkerOptions()
                                 .position(position).title(Marker.utilizador_id.toString() + "+" + Marker.titulo)
-                                .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString())
+                                .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString() + "+" + Marker.id_anom)
                                 .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)))
                         }
 
@@ -126,12 +126,20 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
         mMap = googleMap
 
         // Adicionar um marcador
-        val braga = LatLng(41.542114, -8.423440)
-        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(braga, 10.0f)) // centra o mapa nas cordenadas do ponto e com o zoom já aplicado
+        val braga = LatLng(41.6946, -8.83016)
+        mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(braga, 12.0f)) // centra o mapa nas cordenadas do ponto e com o zoom já aplicado
 
         mMap.setInfoWindowAdapter(CustomInfoWindowForGoogleMap(this))
 
         googleMap.setOnInfoWindowClickListener(this)
+
+        if(ActivityCompat.checkSelfPermission(this,
+                android.Manifest.permission.ACCESS_FINE_LOCATION) != PackageManager.PERMISSION_GRANTED){
+            ActivityCompat.requestPermissions(this,
+                arrayOf(android.Manifest.permission.ACCESS_FINE_LOCATION), 1)
+        }else{
+            mMap.isMyLocationEnabled = true
+        }
 
     }
 
@@ -261,7 +269,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
                             } else {
                                 mMap.addMarker(MarkerOptions()
                                     .position(position).title(Marker.utilizador_id.toString() + "+" + Marker.titulo)
-                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString())
+                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString() + "+" + Marker.id_anom)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)))
                             }
                     }
@@ -304,7 +312,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
                             } else {
                                 mMap.addMarker(MarkerOptions()
                                     .position(position).title(Marker.utilizador_id.toString() + "+" + Marker.titulo)
-                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString())
+                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString() + "+" + Marker.id_anom)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)))
                             }
                         }
@@ -347,7 +355,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
                             } else {
                                 mMap.addMarker(MarkerOptions()
                                     .position(position).title(Marker.utilizador_id.toString() + "+" + Marker.titulo)
-                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString())
+                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString() + "+" + Marker.id_anom)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)))
                             }
                         }
@@ -402,7 +410,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
                             } else {
                                 mMap.addMarker(MarkerOptions()
                                     .position(coordenadas).title(Marker.titulo)   // titulo
-                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString())
+                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString() + "+" + Marker.id_anom)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))              //cor
                             }
                         }
@@ -451,7 +459,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
                             } else {
                                 mMap.addMarker(MarkerOptions()
                                     .position(coordenadas).title(Marker.titulo)   // titulo
-                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString())
+                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString() + "+" + Marker.id_anom)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))              //cor
                             }
                         }
@@ -500,7 +508,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
                             } else {
                                 mMap.addMarker(MarkerOptions()
                                     .position(coordenadas).title(Marker.titulo)   // titulo
-                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString())
+                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString() + "+" + Marker.id_anom)
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))              //cor
                             }
                         }
