@@ -1,9 +1,11 @@
 package com.example.smartcities
 
 import android.content.Intent
+import android.graphics.BitmapFactory
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.text.TextUtils
+import android.util.Base64
 import android.util.Log
 import android.view.View
 import android.widget.*
@@ -29,21 +31,42 @@ class Anomalias : AppCompatActivity() {
         setContentView(R.layout.activity_anomalias)
 
          idA= intent.getIntExtra(IDA, 1)
-        val titulo = intent.getStringExtra(TITULOA)
-        val descricao = intent.getStringExtra(DESCRICAOA)
-        val imagemA = intent.getStringExtra(IMAGEM)
-        val tipo = intent.getStringExtra(TIPO)
-
-        findViewById<EditText>(R.id.tituloAnom).setText(titulo)
-        findViewById<EditText>(R.id.descricaoAnom).setText(descricao)
         val image = findViewById<ImageView>(R.id.imagemAnom)
         val spinner = findViewById<Spinner>(R.id.spinner)
+        //Get anomalia by id
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getAnomById(idA.toString().toInt())
+        call.enqueue(object : retrofit2.Callback<List<com.example.smartcities.api.Marker>> {
 
-        Picasso.get().load(imagemA).into(image);       //Passar o link da imagem
+            override fun onResponse(call: retrofit2.Call<List<com.example.smartcities.api.Marker>>, response: retrofit2.Response<List<com.example.smartcities.api.Marker>>) {
+                if (response.isSuccessful){
 
-        image.getLayoutParams().height = 450;
-        image.getLayoutParams().width = 450;
-        image.requestLayout();
+                    for(Marker in response.body()!!){
+
+                        findViewById<EditText>(R.id.tituloAnom).setText(Marker.titulo)
+                        findViewById<EditText>(R.id.descricaoAnom).setText(Marker.descricao)
+
+                        // DESCODIFICAR BASE64
+                        Log.d("TAG MARKER", Marker.imagem.toString())
+                        val decodedString: ByteArray = Base64.decode(Marker.imagem, Base64.DEFAULT)
+                        val decodedByte = BitmapFactory.decodeByteArray(decodedString, 0, decodedString.size)
+                        image.setImageBitmap(decodedByte)
+
+                        image.getLayoutParams().height = 350; // ajudtar tamanho da iamgem
+                        image.getLayoutParams().width = 400;
+                        image.requestLayout();
+
+                    }
+
+                }
+            }
+
+            override fun onFailure(call: retrofit2.Call<List<com.example.smartcities.api.Marker>>, t: Throwable) {
+                Log.d("TAG", "err: " + t.message)
+            }
+
+        })
+
 
         val options = arrayOf("Obras", "Acidente", "Caminhos de Água", "Parques", "Indefinido")
 

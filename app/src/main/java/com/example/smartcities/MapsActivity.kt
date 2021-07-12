@@ -64,7 +64,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
 
         //Obter id do Utilizador
         val sharedPref: SharedPreferences = getSharedPreferences(
-                getString(R.string.login_p), Context.MODE_PRIVATE
+            getString(R.string.login_p), Context.MODE_PRIVATE
         )
         if (sharedPref != null){
             id_utl = sharedPref.all[getString(R.string.id_utl)]
@@ -86,14 +86,14 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
 
                         if (id_utl.toString().toInt() == Marker.utilizador_id) {
                             mMap.addMarker(MarkerOptions()
-                                    .position(position).title(Marker.id_anom.toString())
-                                .snippet(Marker.descricao + "+" + Marker.imagem + "+" + Marker.utilizador_id + "+" + id_utl.toString())
-                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+                                .position(position).title(Marker.utilizador_id.toString() + "+" + Marker.titulo + "+" + Marker.tipo_anom)
+                                .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString() + "+" + Marker.id_anom)
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
                         } else {
                             mMap.addMarker(MarkerOptions()
-                                    .position(position).title(Marker.id_anom.toString())
-                                    .snippet(Marker.descricao + "+" + Marker.imagem + "+" + Marker.utilizador_id + "+" + id_utl.toString())
-                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)))
+                                .position(position).title(Marker.utilizador_id.toString() + "+" + Marker.titulo)
+                                .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString())
+                                .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)))
                         }
 
                     }
@@ -175,7 +175,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
 
                 //Alterar o Shared Preferences
                 val sharedPref: SharedPreferences = getSharedPreferences(
-                        getString(R.string.login_p), Context.MODE_PRIVATE
+                    getString(R.string.login_p), Context.MODE_PRIVATE
                 )
                 with(sharedPref.edit()) {
                     putBoolean(getString(R.string.login_shared), false)
@@ -213,11 +213,7 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
 
         if(id_utl.toString().equals( title?.get(0))){
             val intent = Intent(this ,Anomalias::class.java).apply {
-                putExtra(IDA, snippet?.get(4)!!.toInt())
-                putExtra(TITULOA, title?.get(1))
-                putExtra(DESCRICAOA, snippet?.get(0))
-                putExtra(IMAGEM, snippet?.get(1))
-                putExtra(TIPO, title?.get(2))
+                putExtra(IDA, snippet?.get(3)!!.toInt())
             }
             startActivity(intent)
         }else{

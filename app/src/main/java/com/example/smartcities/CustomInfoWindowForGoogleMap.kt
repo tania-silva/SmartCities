@@ -35,11 +35,10 @@ class CustomInfoWindowForGoogleMap(context: Context) : GoogleMap.InfoWindowAdapt
         val btn2 = view.findViewById<Button>(R.id.button5)
 
         val strs= marker.snippet.split("+").toTypedArray() // Vai buscar o link da imagem
-        val id = marker.title.toInt()
-
+        Log.d("Tag id_anom", strs[3].toString())
         //Get anomalia by id
         val request = ServiceBuilder.buildService(EndPoints::class.java)
-        val call = request.getAnomById(id.toInt())
+        val call = request.getAnomById(strs[3].toInt())
         call.enqueue(object : retrofit2.Callback<List<com.example.smartcities.api.Marker>> {
 
             override fun onResponse(call: retrofit2.Call<List<com.example.smartcities.api.Marker>>, response: retrofit2.Response<List<com.example.smartcities.api.Marker>>) {
@@ -72,7 +71,7 @@ class CustomInfoWindowForGoogleMap(context: Context) : GoogleMap.InfoWindowAdapt
         })
 
         //VISIBILIDADE DOS BOTOES
-        if( strs[2].equals(strs[3])){
+        if( strs[1].equals(strs[2])){
             btn1.visibility = (View.VISIBLE)
             btn2.visibility = (View.VISIBLE)
         }else{
