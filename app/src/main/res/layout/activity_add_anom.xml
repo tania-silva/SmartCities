@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".Anomalias">
+    tools:context=".AddAnom">
 
 
     <EditText
@@ -16,31 +16,50 @@
         android:hint="@string/titulo"
         android:inputType="textPersonName"
         android:maxLength="50"
-        android:textSize="25dp"
         android:paddingStart="12dp"
         android:paddingEnd="12dp"
+        android:textSize="25dp"
         android:textStyle="bold"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.562"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
-    <ImageView
-        android:id="@+id/imagemAnom"
-        android:layout_width="175dp"
-        android:layout_height="141dp"
-        android:layout_marginTop="20dp"
+    <!--Button to open the image selector-->
+    <Button
+        android:id="@+id/BSelectImage"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:layout_centerHorizontal="true"
+        android:layout_marginTop="10dp"
+        android:backgroundTint="@color/amarelo_torrado"
+        android:text="SELECT IMAGE"
+        android:textColor="@android:color/white"
+        android:textSize="18sp"
+        app:layout_constraintBottom_toTopOf="@+id/IVPreviewImage"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintHorizontal_bias="0.497"
+        app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/tituloAnom"
-        tools:srcCompat="@tools:sample/avatars" />
+        app:layout_constraintTop_toBottomOf="@+id/tituloAnom" />
+
+    <!--ImageView to preview the selected image-->
+
+    <ImageView
+        android:id="@+id/IVPreviewImage"
+        android:layout_width="171dp"
+        android:layout_height="119dp"
+        android:layout_below="@id/BSelectImage"
+        android:layout_marginTop="70dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintHorizontal_bias="0.5"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/tituloAnom" />
 
     <EditText
         android:id="@+id/descricaoAnom"
         android:layout_width="296dp"
         android:layout_height="216dp"
-        android:layout_marginTop="10dp"
+        android:layout_marginTop="20dp"
         android:background="@drawable/branco"
         android:ems="10"
         android:gravity="center_horizontal"
@@ -50,7 +69,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/spinner" />
+        app:layout_constraintTop_toBottomOf="@+id/IVPreviewImage" />
 
     <Button
         android:id="@+id/button2"
@@ -59,8 +78,8 @@
         android:layout_marginStart="100dp"
         android:layout_marginLeft="100dp"
         android:layout_marginTop="15dp"
-        android:onClick="Update"
-        android:text="@string/update"
+        android:onClick="adicionarAnom"
+        android:text="@string/addAnom"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descricaoAnom" />
 
@@ -72,7 +91,7 @@
         android:layout_marginEnd="100dp"
         android:layout_marginRight="100dp"
         android:onClick="Delete"
-        android:text="@string/Delete"
+        android:text="@string/cancel"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/descricaoAnom" />
 
@@ -84,7 +103,7 @@
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintHorizontal_bias="0.5"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/imagemAnom" />
+        app:layout_constraintTop_toBottomOf="@+id/IVPreviewImage" />
 
 
 </androidx.constraintlayout.widget.ConstraintLayout>

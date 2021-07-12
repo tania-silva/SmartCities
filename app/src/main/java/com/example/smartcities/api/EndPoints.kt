@@ -27,4 +27,14 @@ interface EndPoints {
     @FormUrlEncoded
     @POST("api/anomalia/delete") // pedido POST para editar anomalia
     fun eliminarAnom(@Field("id_anom") first: Int): Call<Marker>
+
+    @FormUrlEncoded
+    @POST("api/inserirAnom") // pedido POST para reportar anomalia
+    fun addAnom(@Field("utilizador_id") first: Int, @Field("titulo") second: String,
+                @Field("descricao") third: String, @Field("tipo_anom") fourth: String,
+                @Field("imagem") fifth: String, @Field("lat") sixth: Float,
+                @Field("lng") seventh: Float): Call<Marker>
+
+    @GET("api/anomalia/{id}")
+    fun getAnomById(@Path("id") id: Int): Call<List<Marker>>
 }

@@ -6,7 +6,7 @@
     <string name="aviso_desc">Insert description!</string>
     <string name="titulo">Title</string>
     <string name="criar_nota">Add Note</string>
-    <string name="login">Login</string>
+    <string name="login" translatable="false">Login</string>
     <string name="aviso_email">Missign email</string>
     <string name="aviso_pass">Missing Password</string>
     <string name="pass_email_erro">Fields do not match</string>
@@ -24,4 +24,6 @@
     <string name="Delete">Delete</string>
     <string name="visualizar_anom">Can only access your reports</string>
     <string name="edit_sucess">Successfully edited</string>
+    <string name="addAnom">Register</string>
+    <string name="cancel">Cancel</string>
 </resources>

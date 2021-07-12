@@ -1,0 +1,22 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources>
+    <string name="editar">Editar</string>
+    <string name="remover">Eliminar</string>
+    <string name="aviso_titulo">Inseria um título</string>
+    <string name="aviso_desc">Insira uma descrição</string>
+    <string name="titulo">Título</string>
+    <string name="criar_nota">Adicionar Nota</string>
+    <string name="aviso_email">Falta email</string>
+    <string name="aviso_pass">Falta password</string>
+    <string name="pass_email_erro">Credencias não correspondem</string>
+    <string name="email_erro">Email inválido</string>
+    <string name="m_logout">Sair</string>
+    <string name="m_notes">As minhas notas</string>
+    <string name="back">Não pode voltar para trás.</string>
+    <string name="update">Atualizar</string>
+    <string name="Delete">Eliminar</string>
+    <string name="edit_sucess">Editado com sucesso</string>
+    <string name="addAnom">Registar</string>
+    <string name="cancel">Cancelar</string>
+    <string name="visualizar_anom">Só pode aceder aos seus reportes</string>
+</resources>

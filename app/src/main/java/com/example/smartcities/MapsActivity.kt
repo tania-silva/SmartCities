@@ -38,6 +38,8 @@ const val DESCRICAOA="DESCRICAO"
 const val IDA= "OOO"
 const val IMAGEM="IMAGEM"
 const val TIPO="IMAGEM"
+const val LAT = "LAT"
+const val LNG = "LNG"
 
 class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWindowClickListener {
 
@@ -49,6 +51,8 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
     private lateinit var locationCallBack: LocationCallback
     private lateinit var lastLocation: Location
     var id_utl: Any? = null;
+    lateinit var loc : LatLng
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_maps)
@@ -82,12 +86,12 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
 
                         if (id_utl.toString().toInt() == Marker.utilizador_id) {
                             mMap.addMarker(MarkerOptions()
-                                    .position(position).title(Marker.utilizador_id.toString() + "+" + Marker.titulo + "+" + Marker.tipo_anom)
-                                    .snippet(Marker.descricao + "+" + Marker.imagem + "+" + Marker.utilizador_id + "+" + id_utl.toString() + "+" + Marker.id_anom)
+                                    .position(position).title(Marker.id_anom.toString())
+                                .snippet(Marker.descricao + "+" + Marker.imagem + "+" + Marker.utilizador_id + "+" + id_utl.toString())
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
                         } else {
                             mMap.addMarker(MarkerOptions()
-                                    .position(position).title(Marker.utilizador_id.toString() + "+" + Marker.titulo)
+                                    .position(position).title(Marker.id_anom.toString())
                                     .snippet(Marker.descricao + "+" + Marker.imagem + "+" + Marker.utilizador_id + "+" + id_utl.toString())
                                     .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)))
                         }
@@ -107,9 +111,9 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
             override fun onLocationResult(p0: LocationResult?) {
                 super.onLocationResult(p0)
                 lastLocation = p0!!.lastLocation
-                var loc = LatLng(lastLocation.latitude, lastLocation.longitude)
+                loc = LatLng(lastLocation.latitude, lastLocation.longitude)
                 //mMap.moveCamera(CameraUpdateFactory.newLatLngZoom(loc, 15.0f))
-                Log.d("***Latitude", loc.latitude.toString())
+                Log.d("***Latitude oo ",loc.longitude.toString())
             }
         }
         //Localização do Utilizador
@@ -224,7 +228,10 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
 
     fun add_anom(view: View) {
         //Navegar para o menu inicial
-        var intent = Intent(this, AddAnom::class.java)
+        val intent = Intent(this ,AddAnom::class.java).apply {
+            putExtra(LAT, loc.latitude.toString())
+            putExtra(LNG, loc.longitude.toString())
+        }
         startActivity(intent)
     }
 }
