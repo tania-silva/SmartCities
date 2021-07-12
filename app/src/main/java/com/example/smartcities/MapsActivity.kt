@@ -5,6 +5,7 @@ import android.content.DialogInterface
 import android.content.Intent
 import android.content.SharedPreferences
 import android.content.pm.PackageManager
+import android.graphics.Color
 import android.location.Location
 import android.os.Bundle
 import android.util.Log
@@ -28,6 +29,7 @@ import com.google.android.gms.maps.GoogleMap
 import com.google.android.gms.maps.OnMapReadyCallback
 import com.google.android.gms.maps.SupportMapFragment
 import com.google.android.gms.maps.model.BitmapDescriptorFactory
+import com.google.android.gms.maps.model.CircleOptions
 import com.google.android.gms.maps.model.LatLng
 import com.google.android.gms.maps.model.MarkerOptions
 import retrofit2.Call
@@ -229,5 +231,289 @@ class MapsActivity : AppCompatActivity(), OnMapReadyCallback, GoogleMap.OnInfoWi
             putExtra(LNG, loc.longitude.toString())
         }
         startActivity(intent)
+    }
+
+
+
+    fun tipo_todos(view: View) {
+
+        mMap.clear()    // limpa os marcadores do mapa
+
+        // invocar pedido GET anomalias
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getAnomalias()
+        var coordenadas : LatLng
+
+        call.enqueue(object : Callback<List<Marker>> {
+
+            override fun onResponse(call: Call<List<Marker>>, response: Response<List<Marker>>) {
+
+                if (response.isSuccessful) {
+                    for (Marker in response.body()!!) {   // listar todas as anomalias recebidas no mapa
+
+                            coordenadas = LatLng(Marker.lat, Marker.lng)
+                            var position = LatLng(Marker.lat, Marker.lng)
+                            if (id_utl.toString().toInt() == Marker.utilizador_id) {
+                                mMap.addMarker(MarkerOptions()
+                                    .position(position).title(Marker.utilizador_id.toString() + "+" + Marker.titulo + "+" + Marker.tipo_anom)
+                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString() + "+" + Marker.id_anom)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+                            } else {
+                                mMap.addMarker(MarkerOptions()
+                                    .position(position).title(Marker.utilizador_id.toString() + "+" + Marker.titulo)
+                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString())
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)))
+                            }
+                    }
+                }
+
+            }
+
+            override fun onFailure(call: Call<List<Marker>>, t: Throwable) {
+                /* Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()*/
+                Log.d("TAG_", "err: " + t.message)
+            }
+        })
+
+    }
+
+    fun tipo_obras(view: View) {
+
+        mMap.clear()    // limpa os marcadores do mapa
+
+        // invocar pedido GET anomalias
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getAnomalias()
+        var coordenadas : LatLng
+
+        call.enqueue(object : Callback<List<Marker>> {
+
+            override fun onResponse(call: Call<List<Marker>>, response: Response<List<Marker>>) {
+
+                if (response.isSuccessful) {
+                    for (Marker in response.body()!!) {   // listar todas as anomalias recebidas no mapa
+
+                        if (Marker.tipo_anom.equals("Obras")) {
+                            coordenadas = LatLng(Marker.lat, Marker.lng)
+                            var position = LatLng(Marker.lat, Marker.lng)
+                            if (id_utl.toString().toInt() == Marker.utilizador_id) {
+                                mMap.addMarker(MarkerOptions()
+                                    .position(position).title(Marker.utilizador_id.toString() + "+" + Marker.titulo + "+" + Marker.tipo_anom)
+                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString() + "+" + Marker.id_anom)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+                            } else {
+                                mMap.addMarker(MarkerOptions()
+                                    .position(position).title(Marker.utilizador_id.toString() + "+" + Marker.titulo)
+                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString())
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)))
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            override fun onFailure(call: Call<List<Marker>>, t: Throwable) {
+                /* Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()*/
+                Log.d("TAG_", "err: " + t.message)
+            }
+        })
+    }
+
+    fun tipo_acidente(view: View) {
+
+        mMap.clear()    // limpa os marcadores do mapa
+
+        // invocar pedido GET anomalias
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getAnomalias()
+        var coordenadas : LatLng
+
+        call.enqueue(object : Callback<List<Marker>> {
+
+            override fun onResponse(call: Call<List<Marker>>, response: Response<List<Marker>>) {
+
+                if (response.isSuccessful) {
+                    for (Marker in response.body()!!) {   // listar todas as anomalias recebidas no mapa
+
+                        if (Marker.tipo_anom.equals("Acidente")) {
+                            coordenadas = LatLng(Marker.lat, Marker.lng)
+                            var position = LatLng(Marker.lat, Marker.lng)
+                            if (id_utl.toString().toInt() == Marker.utilizador_id) {
+                                mMap.addMarker(MarkerOptions()
+                                    .position(position).title(Marker.utilizador_id.toString() + "+" + Marker.titulo + "+" + Marker.tipo_anom)
+                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString() + "+" + Marker.id_anom)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+                            } else {
+                                mMap.addMarker(MarkerOptions()
+                                    .position(position).title(Marker.utilizador_id.toString() + "+" + Marker.titulo)
+                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString())
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_MAGENTA)))
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            override fun onFailure(call: Call<List<Marker>>, t: Throwable) {
+                /* Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()*/
+                Log.d("TAG_", "err: " + t.message)
+            }
+        })
+
+    }
+
+    fun calculateDistance(lat1: Double, lng1: Double, lat2: Double, lng2: Double): Float {      // função para calcular distancia
+        val result = FloatArray(1)
+        Location.distanceBetween(lat1, lng1, lat2, lng2, result)
+        return result[0]
+    }
+
+    fun distancia_500(view: View) {
+
+        mMap.clear()    // limpa os marcadores do mapa
+
+
+        // invocar pedido GET anomalias
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getAnomalias()
+        var coordenadas : LatLng
+
+        call.enqueue(object : Callback<List<Marker>> {
+
+            override fun onResponse(call: Call<List<Marker>>, response: Response<List<Marker>>) {
+
+                if (response.isSuccessful) {
+                    mMap.addCircle(
+                        CircleOptions()
+                        .center(LatLng(loc.latitude, loc.longitude))
+                        .radius(500.0)
+                        .strokeColor(Color.YELLOW))
+                    for (Marker in response.body()!!) {   // listar todas as anomalias recebidas no mapa
+                        var dist = calculateDistance(loc.latitude, loc.longitude, Marker.lat, Marker.lng)
+                        if (dist <= 500) {
+                            coordenadas = LatLng(Marker.lat, Marker.lng)
+                            if (id_utl.toString().toInt() == Marker.utilizador_id) {   // se a anomalia for do utilizador logado aparece o marcador azul
+                                mMap.addMarker(MarkerOptions()
+                                    .position(coordenadas).title(Marker.titulo)
+                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString() + "+" + Marker.id_anom)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+                            } else {
+                                mMap.addMarker(MarkerOptions()
+                                    .position(coordenadas).title(Marker.titulo)   // titulo
+                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString())
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))              //cor
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            override fun onFailure(call: Call<List<Marker>>, t: Throwable) {
+                /* Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()*/
+                Log.d("TAG_", "err: " + t.message)
+            }
+        })
+
+    }
+
+    fun distancia_1500(view: View) {
+
+        mMap.clear()    // limpa os marcadores do mapa
+
+
+        // invocar pedido GET anomalias
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getAnomalias()
+        var coordenadas : LatLng
+
+        call.enqueue(object : Callback<List<Marker>> {
+
+            override fun onResponse(call: Call<List<Marker>>, response: Response<List<Marker>>) {
+
+                if (response.isSuccessful) {
+                    mMap.addCircle(
+                        CircleOptions()
+                            .center(LatLng(loc.latitude, loc.longitude))
+                            .radius(1500.0)
+                            .strokeColor(Color.YELLOW))
+                    for (Marker in response.body()!!) {   // listar todas as anomalias recebidas no mapa
+                        var dist = calculateDistance(loc.latitude, loc.longitude, Marker.lat, Marker.lng)
+                        if (dist <= 1500) {
+                            coordenadas = LatLng(Marker.lat, Marker.lng)
+                            if (id_utl.toString().toInt() == Marker.utilizador_id) {   // se a anomalia for do utilizador logado aparece o marcador azul
+                                mMap.addMarker(MarkerOptions()
+                                    .position(coordenadas).title(Marker.titulo)
+                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString() + "+" + Marker.id_anom)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+                            } else {
+                                mMap.addMarker(MarkerOptions()
+                                    .position(coordenadas).title(Marker.titulo)   // titulo
+                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString())
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))              //cor
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            override fun onFailure(call: Call<List<Marker>>, t: Throwable) {
+                /* Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()*/
+                Log.d("TAG_", "err: " + t.message)
+            }
+        })
+
+    }
+
+    fun distancia_3000(view: View) {
+
+        mMap.clear()    // limpa os marcadores do mapa
+
+
+        // invocar pedido GET anomalias
+        val request = ServiceBuilder.buildService(EndPoints::class.java)
+        val call = request.getAnomalias()
+        var coordenadas : LatLng
+
+        call.enqueue(object : Callback<List<Marker>> {
+
+            override fun onResponse(call: Call<List<Marker>>, response: Response<List<Marker>>) {
+
+                if (response.isSuccessful) {
+                    mMap.addCircle(
+                        CircleOptions()
+                            .center(LatLng(loc.latitude, loc.longitude))
+                            .radius(3000.0)
+                            .strokeColor(Color.YELLOW))
+                    for (Marker in response.body()!!) {   // listar todas as anomalias recebidas no mapa
+                        var dist = calculateDistance(loc.latitude, loc.longitude, Marker.lat, Marker.lng)
+                        if (dist <= 3000) {
+                            coordenadas = LatLng(Marker.lat, Marker.lng)
+                            if (id_utl.toString().toInt() == Marker.utilizador_id) {   // se a anomalia for do utilizador logado aparece o marcador azul
+                                mMap.addMarker(MarkerOptions()
+                                    .position(coordenadas).title(Marker.titulo)
+                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString() + "+" + Marker.id_anom)
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_AZURE)))
+                            } else {
+                                mMap.addMarker(MarkerOptions()
+                                    .position(coordenadas).title(Marker.titulo)   // titulo
+                                    .snippet(Marker.descricao + "+" + Marker.utilizador_id + "+" + id_utl.toString())
+                                    .icon(BitmapDescriptorFactory.defaultMarker(BitmapDescriptorFactory.HUE_RED)))              //cor
+                            }
+                        }
+                    }
+                }
+
+            }
+
+            override fun onFailure(call: Call<List<Marker>>, t: Throwable) {
+                /* Toast.makeText(this@MainActivity, "${t.message}", Toast.LENGTH_SHORT).show()*/
+                Log.d("TAG_", "err: " + t.message)
+            }
+        })
+
     }
 }

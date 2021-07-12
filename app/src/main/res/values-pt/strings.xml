@@ -19,4 +19,9 @@
     <string name="addAnom">Registar</string>
     <string name="cancel">Cancelar</string>
     <string name="visualizar_anom">Só pode aceder aos seus reportes</string>
+    <string name="obras">Obras</string>
+    <string name="caminhos_agua">Caminhos Água</string>
+    <string name="acidente">Acidente</string>
+    <string name="parques">Parques</string>
+    <string name="indefinido">Indefinido</string>
 </resources>

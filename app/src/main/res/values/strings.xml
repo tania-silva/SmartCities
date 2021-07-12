@@ -26,4 +26,13 @@
     <string name="edit_sucess">Successfully edited</string>
     <string name="addAnom">Register</string>
     <string name="cancel">Cancel</string>
+    <string name="obras">Construction</string>
+    <string name="caminhos_agua">Waterways</string>
+    <string name="acidente">Accident</string>
+    <string name="parques">Parks</string>
+    <string name="indefinido">Undefined</string>
+    <string name="metros500" translatable="false">500 m</string>
+    <string name="metros1500" translatable="false">1.5 KM</string>
+    <string name="metros3000" translatable="false">3 KM</string>
+    <string name="todos" translatable="false">All</string>
 </resources>
